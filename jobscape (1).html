@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobScape — Better Matches. Better Futures.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:     #0F2D52;
+      --navy-mid: #1A3F6F;
+      --navy-lt:  #2A5490;
+      --teal:     #00A99D;
+      --teal-lt:  #00C4B7;
+      --teal-dim: #007F76;
+      --off-white:#F4F8FC;
+      --teal-wash:#E8F5F4;
+      --text:     #1C2D3F;
+      --muted:    #5A7592;
+      --white:    #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 6%;
+      background: rgba(15,45,82,0.97);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+
+    /* JS Logo SVG */
+    .logo-mark {
+      width: 38px; height: 38px; flex-shrink: 0;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .nav-wordmark {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .nav-wordmark span { color: var(--teal); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-lt); }
+
+    .nav-cta {
+      background: var(--teal);
+      color: var(--white) !important;
+      padding: 9px 22px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal-lt) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex; align-items: center;
+      padding: 120px 6% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background geometry */
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -80px; top: 50%;
+      transform: translateY(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,169,157,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 5%; top: 15%;
+      width: 360px; height: 360px;
+      border: 1.5px solid rgba(0,169,157,0.18);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: pulse-ring 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50%       { transform: scale(1.08); opacity: 0.15; }
+    }
+
+    .hero-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,169,157,0.15);
+      border: 1px solid rgba(0,169,157,0.3);
+      border-radius: 100px;
+      padding: 6px 14px;
+      margin-bottom: 28px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--teal-lt);
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--teal);
+      background: linear-gradient(135deg, var(--teal), var(--teal-lt));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: var(--white);
+      padding: 14px 30px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--teal-lt); transform: translateY(-1px); }
+
+    .btn-secondary {
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.85);
+      padding: 14px 30px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--teal-lt); color: var(--teal-lt); }
+
+    /* Hero logo animation */
+    .hero-visual {
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+
+    .logo-animation {
+      position: relative;
+      width: 320px; height: 320px;
+    }
+
+    .shape-employer {
+      position: absolute;
+      width: 180px; height: 180px;
+      background: var(--navy-lt);
+      border-radius: 50% 50% 50% 0;
+      border: 3px solid rgba(0,169,157,0.4);
+      top: 30px; left: 20px;
+      animation: float-employer 5s ease-in-out infinite;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .shape-candidate {
+      position: absolute;
+      width: 180px; height: 180px;
+      background: rgba(0,169,157,0.15);
+      border-radius: 50% 0 50% 50%;
+      border: 3px solid var(--teal);
+      bottom: 30px; right: 20px;
+      animation: float-candidate 5s ease-in-out infinite;
+      animation-delay: -2.5s;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .shape-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .shape-employer .shape-label { color: rgba(255,255,255,0.5); }
+    .shape-candidate .shape-label { color: var(--teal-lt); }
+
+    .connect-line {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px; height: 80px;
+      background: var(--teal);
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: connect-pulse 5s ease-in-out infinite;
+    }
+
+    @keyframes float-employer {
+      0%, 100% { transform: translate(0,0) rotate(0deg); }
+      50%       { transform: translate(8px,-10px) rotate(3deg); }
+    }
+    @keyframes float-candidate {
+      0%, 100% { transform: translate(0,0) rotate(0deg); }
+      50%       { transform: translate(-8px,10px) rotate(-3deg); }
+    }
+    @keyframes connect-pulse {
+      0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.15; }
+      50%       { transform: translate(-50%,-50%) scale(2.5); opacity: 0; }
+    }
+
+    .hero-stats {
+      margin-top: 52px;
+      display: flex; gap: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 32px;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; }
+    .stat-num {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.8rem; font-weight: 800;
+      color: var(--teal-lt);
+      letter-spacing: -0.03em;
+    }
+    .stat-label {
+      font-size: 0.78rem; font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 96px 6%; }
+
+    .section-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    .section-lead {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { background: var(--off-white); }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 56px;
+    }
+
+    .how-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 30px;
+      border: 1px solid rgba(15,45,82,0.08);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .how-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(15,45,82,0.1);
+    }
+
+    .how-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--navy-lt));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .how-card:hover::before { transform: scaleX(1); }
+
+    .how-icon {
+      width: 52px; height: 52px;
+      background: var(--teal-wash);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px;
+    }
+    .how-icon svg { width: 26px; height: 26px; }
+
+    .how-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .how-card p {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ── FOR WHOM ── */
+    .for-section { background: var(--white); }
+
+    .for-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 56px;
+    }
+
+    .for-card {
+      border-radius: 20px;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .for-card.employers {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .for-card.candidates {
+      background: var(--teal-wash);
+      border: 1.5px solid rgba(0,169,157,0.25);
+    }
+
+    .for-card .for-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .for-card.employers .for-tag { color: var(--teal-lt); }
+    .for-card.candidates .for-tag { color: var(--teal-dim); }
+
+    .for-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .for-card.employers h3 { color: var(--white); }
+    .for-card.candidates h3 { color: var(--navy); }
+
+    .for-card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .for-card.employers p { color: rgba(255,255,255,0.65); }
+    .for-card.candidates p { color: var(--muted); }
+
+    .for-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 36px;
+    }
+    .for-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.9rem;
+    }
+    .for-card.employers .for-list li { color: rgba(255,255,255,0.8); }
+    .for-card.candidates .for-list li { color: var(--text); }
+
+    .for-list li::before {
+      content: '';
+      width: 18px; height: 18px; flex-shrink: 0;
+      border-radius: 50%;
+      margin-top: 1px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .for-card.employers .for-list li::before {
+      background-color: rgba(0,169,157,0.2);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%2300C4B7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .for-card.candidates .for-list li::before {
+      background-color: rgba(0,169,157,0.15);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%2300A99D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+
+    .btn-card-employers {
+      background: var(--teal);
+      color: var(--white);
+      padding: 12px 26px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn-card-employers:hover { background: var(--teal-lt); }
+
+    .btn-card-candidates {
+      background: var(--navy);
+      color: var(--white);
+      padding: 12px 26px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn-card-candidates:hover { background: var(--navy-mid); }
+
+    /* ── WHY JOBSCAPE ── */
+    .why-section { background: var(--navy); }
+
+    .why-section h2 { color: var(--white); }
+    .why-section .section-eyebrow { color: var(--teal-lt); }
+    .why-section .section-lead { color: rgba(255,255,255,0.6); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .why-item {
+      background: rgba(255,255,255,0.03);
+      padding: 36px 32px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.2s;
+    }
+    .why-item:hover { background: rgba(0,169,157,0.06); }
+
+    .why-item h4 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .why-item h4::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+    .why-item p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.5);
+      padding-left: 20px;
+    }
+
+    /* ── INDUSTRIES ── */
+    .industries-section { background: var(--off-white); }
+
+    .industry-tags {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 40px;
+    }
+    .industry-tag {
+      background: var(--white);
+      border: 1.5px solid rgba(15,45,82,0.12);
+      color: var(--navy);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: default;
+    }
+    .industry-tag:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+    .industry-tag.featured {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+    }
+
+    /* ── CONTACT ── */
+    .contact-section { background: var(--white); }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 56px;
+    }
+
+    .contact-info p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .contact-details {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .contact-row {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .contact-icon {
+      width: 40px; height: 40px;
+      background: var(--teal-wash);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 18px; height: 18px; }
+
+    .contact-row span {
+      font-size: 0.95rem; color: var(--text); font-weight: 500;
+    }
+    .contact-row a {
+      font-size: 0.95rem; color: var(--teal-dim); font-weight: 500;
+      text-decoration: none;
+    }
+    .contact-row a:hover { color: var(--teal); }
+
+    /* Contact form */
+    .contact-form {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .field-group { display: flex; flex-direction: column; gap: 6px; }
+    .field-group label {
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--navy); letter-spacing: 0.04em;
+    }
+    .field-group input,
+    .field-group select,
+    .field-group textarea {
+      border: 1.5px solid rgba(15,45,82,0.15);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .field-group input:focus,
+    .field-group select:focus,
+    .field-group textarea:focus {
+      border-color: var(--teal);
+    }
+    .field-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-submit {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+    .form-submit:hover { background: var(--navy-mid); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 56px 6% 32px;
+    }
+
+    .footer-inner {
+      max-width: 1160px; margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 28px;
+    }
+
+    .footer-brand p {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.45);
+      margin-top: 14px;
+      max-width: 280px;
+    }
+
+    .footer-col h5 {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--teal-lt); }
+
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-legal {
+      display: flex; gap: 24px;
+    }
+    .footer-legal a {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { display: none; }
+      .how-grid { grid-template-columns: 1fr; }
+      .for-split { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 580px) {
+      nav { padding: 16px 5%; }
+      section { padding: 72px 5%; }
+      .footer-top { grid-template-columns: 1fr; }
+      .hero-stats { flex-wrap: wrap; gap: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-wordmark">Job<span>Scape</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#for-you">For You</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <h1>Finding Better <em>Matches</em><br>for Better <em>Futures.</em></h1>
+      <p class="hero-sub">
+        JobScape connects the right people with the right businesses — not just for today, but for the long term. Because the best hire isn't always the most obvious one.
+      </p>
+      <div class="hero-actions">
+        <a href="#for-you" class="btn-primary">Find Your Match</a>
+        <a href="#how" class="btn-secondary">How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num" style="font-size:1.1rem; color: rgba(255,255,255,0.6); font-weight:400; font-family:'Inter',sans-serif; letter-spacing:0;">Finding Better Matches for Better Futures.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated shapes -->
+    <div class="hero-visual">
+      <div class="logo-animation">
+        <div class="shape-employer">
+          <span class="shape-label">Employer</span>
+        </div>
+        <div class="connect-line"></div>
+        <div class="shape-candidate">
+          <span class="shape-label">Candidate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-inner">
+    <p class="section-eyebrow">The Process</p>
+    <h2>Finding Fit Beyond<br>the Resume</h2>
+    <p class="section-lead">
+      A good CV tells us what someone has done. A great match tells us where they belong next. Our process goes deeper — on both sides.
+    </p>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-icon">
+          <!-- Listen icon -->
+          <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="13" cy="10" r="5" stroke="#00A99D" stroke-width="2"/>
+            <path d="M5 22c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#00A99D" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>We Listen First</h3>
+        <p>Before sending a single CV, we take the time to understand your business culture, team dynamics, and the kind of person who genuinely thrives in your environment.</p>
+      </div>
+
+      <div class="how-card">
+        <div class="how-icon">
+          <!-- Match icon -->
+          <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 4 L22 9 L22 17 L13 22 L4 17 L4 9 Z" stroke="#00A99D" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M9 13 l2.5 2.5 L17 10" stroke="#00A99D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>We Match Deliberately</h3>
+        <p>We assess skills, values, and working style — not just qualifications. Every candidate we put forward has been considered against your specific context, not a keyword list.</p>
+      </div>
+
+      <div class="how-card">
+        <div class="how-icon">
+          <!-- Growth icon -->
+          <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 20 L9 13 L13 16 L18 8 L22 10" stroke="#00A99D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 6 L22 6 L22 9" stroke="#00A99D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>We Follow Through</h3>
+        <p>The relationship doesn't end at the offer. We stay in contact with both employer and candidate to ensure the placement turns into something lasting and mutually beneficial.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR EMPLOYERS -->
+<section class="for-section" id="for-you">
+  <div class="section-inner">
+    <p class="section-eyebrow">Who We Help</p>
+    <h2>Built for employers.<br>Focused on fit.</h2>
+    <p class="section-lead">
+      We work directly with businesses to find the right people — so you can stop sifting and start hiring with confidence.
+    </p>
+
+    <div class="for-split" style="grid-template-columns: 1fr;">
+      <!-- Employers -->
+      <div class="for-card employers" style="max-width: 680px;">
+        <div class="for-tag">For Employers</div>
+        <h3>Hire with Confidence</h3>
+        <p>Stop sifting through unsuitable applications. Tell us what you need — including what you can't always put in a job spec — and let us find the person who genuinely fits.</p>
+        <ul class="for-list">
+          <li>Pre-screened, values-matched candidates</li>
+          <li>Specialist knowledge across key NRW sectors</li>
+          <li>Support from first brief to successful onboarding</li>
+          <li>Discreet search for sensitive or senior roles</li>
+        </ul>
+        <a href="#contact" class="btn-card-employers">Post a Role</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY JOBSCAPE -->
+<section class="why-section" id="why">
+  <div class="section-inner">
+    <p class="section-eyebrow">Our Difference</p>
+    <h2>Why JobScape</h2>
+    <p class="section-lead">
+      Recruitment built on balance. We succeed when both sides of the match succeed — that's not just a philosophy, it shapes everything we do.
+    </p>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <h4>Sector-Specific Matching</h4>
+        <p>We operate internationally — connecting talent and employers across Germany, England, and the US. Right now we focus on four core sectors: manual labor, management &amp; administrative, care &amp; services, and IT, cybersecurity &amp; tech.</p>
+      </div>
+      <div class="why-item">
+        <h4>Quality Over Volume</h4>
+        <p>We'd rather send you three excellent candidates than twelve mediocre ones. Every recommendation we make carries our name, and we take that seriously.</p>
+      </div>
+      <div class="why-item">
+        <h4>Mutual Benefit, Always</h4>
+        <p>We don't celebrate a placement that doesn't work out for both parties. Our process is designed to identify the right fit, not just close a vacancy.</p>
+      </div>
+      <div class="why-item">
+        <h4>Long-Term Thinking</h4>
+        <p>We build relationships with employers and candidates over time — which means when a new role or opportunity arises, we already know who the right person is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- HOW WE MATCH -->
+<section style="background: var(--white); padding: 96px 6%;" id="matching">
+  <div class="section-inner">
+    <p class="section-eyebrow">Our Approach</p>
+    <h2>How We Match</h2>
+    <p class="section-lead">
+      Not every role is won or lost on the same factors. Our matching system adjusts the criteria it weighs by sector, so each candidate is judged on what actually predicts success in that specific kind of work.
+    </p>
+
+    <div class="how-grid" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="how-card">
+        <div class="how-icon">
+          <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 19h18" stroke="#00A99D" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6 19a7 7 0 0 1 14 0" stroke="#00A99D" stroke-width="2" stroke-linecap="round"/>
+            <path d="M13 8v4" stroke="#00A99D" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Manual Labor</h3>
+        <p>Physical capability, relevant certifications, safety awareness, and a track record of reliability — the things that actually predict success on site.</p>
+      </div>
+
+      <div class="how-card">
+        <div class="how-icon">
+          <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="10" width="18" height="12" rx="2" stroke="#00A99D" stroke-width="2"/>
+            <path d="M9 10V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3" stroke="#00A99D" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3>Management &amp; Administrative</h3>
+        <p>Leadership style, organizational rigor, communication clarity, and how someone handles competing priorities under pressure.</p>
+      </div>
+
+      <div class="how-card">
+        <div class="how-icon">
+          <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 22s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12z" stroke="#00A99D" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Care &amp; Services</h3>
+        <p>Empathy, patience, communication with vulnerable groups, and the emotional resilience the role demands.</p>
+      </div>
+
+      <div class="how-card">
+        <div class="how-icon">
+          <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 3l9 4v6c0 6-9 10-9 10S4 19 4 13V7l9-4z" stroke="#00A99D" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M9.5 13l2.5 2.5L17 10" stroke="#00A99D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>IT, Cybersecurity &amp; Tech</h3>
+        <p>Technical depth, problem-solving approach, adaptability to new tools and threats, and attention to detail.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHERE DO WE SERVE -->
+<section style="background: var(--off-white); padding: 96px 6%;">
+  <div class="section-inner">
+    <p class="section-eyebrow">Our Reach</p>
+    <h2>Where do we serve?</h2>
+    <p class="section-lead">
+      Headquartered in Kamp-Lintfort, Germany, JobScape operates across three markets — connecting talent and businesses in Germany, England, and the United States.
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px;">
+      <div style="background: var(--white); border-radius: 16px; padding: 36px 28px; border: 1px solid rgba(15,45,82,0.08); display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-size: 2.4rem;">🇩🇪</span>
+        <h3 style="font-family:'Sora',sans-serif; font-size:1.2rem; font-weight:700; color:var(--navy); letter-spacing:-0.02em;">Germany</h3>
+        <p style="font-size:0.9rem; line-height:1.7; color:var(--muted);">Our home base. Based in Kamp-Lintfort in North Rhine-Westphalia, we know the German job market from the inside — its industries, its culture, and what makes a hire last.</p>
+      </div>
+      <div style="background: var(--white); border-radius: 16px; padding: 36px 28px; border: 1px solid rgba(15,45,82,0.08); display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-size: 2.4rem;">🇬🇧</span>
+        <h3 style="font-family:'Sora',sans-serif; font-size:1.2rem; font-weight:700; color:var(--navy); letter-spacing:-0.02em;">England</h3>
+        <p style="font-size:0.9rem; line-height:1.7; color:var(--muted);">Connecting UK-based employers and candidates with opportunities across the market — bringing the same depth of matching and care for long-term fit.</p>
+      </div>
+      <div style="background: var(--white); border-radius: 16px; padding: 36px 28px; border: 1px solid rgba(15,45,82,0.08); display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-size: 2.4rem;">🇺🇸</span>
+        <h3 style="font-family:'Sora',sans-serif; font-size:1.2rem; font-weight:700; color:var(--navy); letter-spacing:-0.02em;">United States</h3>
+        <p style="font-size:0.9rem; line-height:1.7; color:var(--muted);">Serving employers and professionals across the US, with the same commitment to meaningful, compatible, and lasting matches that defines everything we do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-inner">
+    <p class="section-eyebrow">Get in Touch</p>
+    <h2>Let's find<br>the right fit.</h2>
+
+    <div class="contact-layout" style="grid-template-columns: 1fr; max-width: 580px;">
+      <div class="contact-info">
+        <p>
+          Whether you're a business looking to grow your team or a professional considering your next move — we'd love to hear from you. There's no obligation, just an honest conversation.
+        </p>
+        <div class="contact-details">
+          <div class="contact-row">
+            <div class="contact-icon">
+              <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 1C6.24 1 4 3.24 4 6c0 4 5 11 5 11s5-7 5-11c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 1 1 9 4a1.5 1.5 0 0 1 0 3.5z" fill="#00A99D"/>
+              </svg>
+            </div>
+            <span>Based in Kamp-Lintfort, Germany</span>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">
+              <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 4h14v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4zm0 0l7 6 7-6" stroke="#00A99D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+            <a href="mailto:contact@jobscape.net">contact@jobscape.net</a>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">
+              <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 3h3l1.5 4-1.8 1.1A11 11 0 0 0 10.9 12.3L12 10.5l4 1.5v3C16 15.3 12 17 8 13 4 9 2 5 3 3z" stroke="#00A99D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+            <a href="tel:+4915172426456">+49 (0) 15172426456</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="text-decoration:none;">
+          <span class="nav-wordmark">Job<span>Scape</span></span>
+        </a>
+        <p>Finding Better Matches for Better Futures. Recruitment built on balance, compatibility, and long-term success — for both employers and candidates.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#for-you">For Employers</a></li>
+          <li><a href="#for-you">For Candidates</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#">Executive Search</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Sectors</h5>
+        <ul>
+          <li><a href="#">Engineering</a></li>
+          <li><a href="#">Logistics</a></li>
+          <li><a href="#">IT &amp; Tech</a></li>
+          <li><a href="#">Healthcare</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#why">About Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">Impressum</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 JobScape · Germany · England · United States · jobscape.net</p>
+      <div class="footer-legal">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutzerklärung</a>
+        <a href="#">Cookie-Einstellungen</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth nav active highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === '#' + entry.target.id
+            ? 'rgba(255,255,255,0.95)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Scroll reveal
+  const revealItems = document.querySelectorAll('.how-card, .for-card, .why-item, .industry-tag');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, i * 60);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  revealItems.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    revealObserver.observe(el);
+  });
+
+  // Form handler
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#00A99D';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
